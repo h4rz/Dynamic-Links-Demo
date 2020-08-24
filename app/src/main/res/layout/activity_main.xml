@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvReceiveStatic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/receive" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvReceive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDeepLinkStatic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/deep_link" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDeepLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnShare"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/share"
+        android:textAllCaps="false"/>
+
+</LinearLayout>

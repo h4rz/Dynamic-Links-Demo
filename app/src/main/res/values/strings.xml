@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Dynamic Links Demo</string>
+    <string name="receive">Receive</string>
+    <string name="deep_link">Deep Link</string>
+    <string name="share">Share</string>
+    <string name="empty_deep_link">Deep Link not found.</string>
+</resources>
