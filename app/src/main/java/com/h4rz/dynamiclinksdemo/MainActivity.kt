@@ -20,17 +20,22 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
 
-        private const val DEEP_LINK_URL = "https://kotlin.example.com/deeplinks"
+        private const val DEEP_LINK_URL = "https://nhancebyphoenix.com/"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         myContext = this
-        val newDeepLink = buildDeepLink(Uri.parse(DEEP_LINK_URL))
-        tvDeepLink.text = newDeepLink.toString()
         btnShare.setOnClickListener {
-            shareDeepLink(newDeepLink.toString())
+            shareDeepLink(tvDeepLink.text.toString())
+        }
+        btnGenerate.setOnClickListener {
+            var text = etDynamicLink.text.toString()
+            if (text.isEmpty())
+                text = DEEP_LINK_URL
+            val newDeepLink = buildDeepLink(Uri.parse(text))
+            tvDeepLink.text = newDeepLink.toString()
         }
         checkForDeepLinks()
     }
@@ -81,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                     if (parts != null) {
                         for (part in parts) {
                             if (part == "google")
-                                DynamicLinksActivity.startActivity(myContext)
+                                DynamicLinksActivity.startActivity(myContext,deepLink.toString())
                         }
                     }
                 } else

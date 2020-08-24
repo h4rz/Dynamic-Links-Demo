@@ -8,7 +8,7 @@ import android.os.Bundle
 class DynamicLinksActivity : AppCompatActivity() {
 
     companion object {
-        fun startActivity(context: Context) {
+        fun startActivity(context: Context, toString: String) {
             val intent = Intent(context, DynamicLinksActivity::class.java)
             context.startActivity(intent)
         }

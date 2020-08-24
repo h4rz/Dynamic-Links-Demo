@@ -4,4 +4,6 @@
     <string name="deep_link">Deep Link</string>
     <string name="share">Share</string>
     <string name="empty_deep_link">Deep Link not found.</string>
+    <string name="enter_url_for_which_you_want_to_generate_dynamic_link">Enter URL For which you want to generate dynamic link(eg. https://www.google.com)</string>
+    <string name="generate_link">Generate Link</string>
 </resources>
