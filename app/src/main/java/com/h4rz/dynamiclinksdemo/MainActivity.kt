@@ -9,7 +9,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
+import com.google.firebase.dynamiclinks.ktx.androidParameters
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.dynamiclinks.ktx.iosParameters
+import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -34,8 +37,7 @@ class MainActivity : AppCompatActivity() {
             var text = etDynamicLink.text.toString()
             if (text.isEmpty())
                 text = DEEP_LINK_URL
-            val newDeepLink = buildDeepLink(Uri.parse(text))
-            tvDeepLink.text = newDeepLink.toString()
+            buildShortDynamicLink(Uri.parse(text))
         }
         checkForDeepLinks()
     }
@@ -49,7 +51,29 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun buildDeepLink(deepLink: Uri): Uri {
+    fun buildShortDynamicLink(deepLink: Uri) {
+        var shortLink: Uri? = null
+        val dynamicLink = FirebaseDynamicLinks.getInstance().shortLinkAsync {
+            link = Uri.parse(deepLink.toString())
+            domainUriPrefix = "https://h4rz.page.link"
+            androidParameters("com.h4rz.dynamiclinksdemo") {
+                DynamicLink.AndroidParameters.Builder().build()
+            }
+            iosParameters("com.example.ios") {
+                this.build()
+            }
+        }.addOnSuccessListener { result ->
+            // Short link created
+            shortLink = result.shortLink
+            tvDeepLink.text = shortLink.toString()
+            val flowchartLink = result.previewLink
+        }.addOnFailureListener {
+            // Error
+            // ...
+        }
+    }
+
+    private fun buildLongDynamicLink(deepLink: Uri){
         val dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
             .setLink(Uri.parse(deepLink.toString()))
             .setDomainUriPrefix("https://h4rz.page.link")
@@ -61,7 +85,7 @@ class MainActivity : AppCompatActivity() {
 
         val dynamicLinkUri = dynamicLink.uri
 
-        return dynamicLinkUri;
+        tvDeepLink.text = dynamicLinkUri.toString()
     }
 
     private fun checkForDeepLinks() {
